@@ -1,0 +1,85 @@
+var React = require('react');
+var CommentList = require('./commentList');
+var CommentForm = require('./commentForm');
+var D3jscircle = require('./../d3circle/circle')
+var D3js = require('d3');
+
+//Main parent box for all others component
+module.exports = React.createClass({
+	
+	//init component properties 'data' and 'count' - count of requests
+	getInitialState: function() {
+		return {data: this.props.data, count: 0};
+	},
+	  
+	getDataFromSrv: function() {
+		//It's request backend, wich do real request to another remote api 
+	    $.ajax({
+			type: 'GET',
+			url: '/loripsum',
+			success: function(response) {
+				//this.setState({data: data});
+				console.log("Response is" + response);
+			}.bind(this),
+			error: function(xhr, status, err) {
+				console.error('/loripsum ', status, err.toString());
+			}.bind(this)
+		});
+	    
+		this.setState({
+			//data: staticData,
+			count: this.state.count+=1
+	    });
+		
+	},
+	  
+	//This event works after component render. Do stuff for server requsets and etc.
+	componentDidMount: function() {
+		this.getDataFromSrv();
+	    //Start timer - poll this.getDataFromSrv every 2 seconds
+	    setInterval(this.getDataFromSrv, 5000);
+		D3jscircle.circle();
+		//this.circle();
+	},
+	
+	circle: function() {
+		D3js.select("#circle_container").append("circle")
+								.attr("cx", 250)
+								.attr("cy", 250)
+								.attr("r", 1 * (Math.floor(Math.random() * (100 - 50 + 1)) + 50))
+								.attr("fill", "purple")
+								.on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
+								.on("mouseout", function(){d3.select(this).style("fill", "purple");})
+								.on("mousedown", animateFirstStep);
+						
+
+		function animateFirstStep(){
+			d3.select(this)
+			  .transition()            
+				.delay(0)            
+				.duration(1000)
+				.attr("r", 10)
+				.attr("cx", Math.floor(Math.random() * (450 - 50 + 1)) + 50)
+				.attr("cy", Math.floor(Math.random() * (450 - 50 + 1)) + 50)
+				.each("end", animateSecondStep);
+		};
+
+		function animateSecondStep(){
+			d3.select(this)
+			  .transition()
+				.duration(1000)
+				.attr("r", 100)
+				.each("end", animateFirstStep);
+		};
+	},
+	  
+	render: function() {
+		return (
+			<div className="commentBox">
+				<h1 style={divStyle}>Comments</h1>
+				<CommentList data={this.state.data} />
+				<CommentForm count={this.state.count}/>
+			</div>
+	    );
+	}
+})

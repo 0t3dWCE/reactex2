@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>ReactJS + Bootstrap</title>
+
+    <!-- Plug-in Bootstrap -->
+    <link href="thirdparty/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+	
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="thirdparty/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	
+	<!--D3js plug in
+	<script type="text/javascript" src="d3.v2.min.js"></script>
+    <!--script src="thirdparty/react.bootstrap-0.25.0/react-bootstrap.js"></script-->
+	
+    <!-- Plug-in React.js -->
+	<!--script src="build/react.js"></script>
+	<!-- Plug-in React-Bootstrap for plaing games -->
+    <!--script src="thirdparty/react.bootstrap-0.25.0/react-bootstrap.min.js"></script>
+    <!--script src="build/JSXTransformer.js"></script>    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-md-4">
+	    Here will be another component
+		<svg width="420" height="1500">
+			<circle cx="450" cy="450" r="450" fill="purple" />
+		</svg>
+	  </div>
+      <div class="col-md-4">
+		<h1>With ReactJS</h1>
+		<div class="row" id="content"></div>
+	  </div>
+      <div class="col-md-4">
+		Here will be another component
+		<svg width="500" height="500" id="circle_container">
+			<circle cx="25" cy="25" r="25" fill="purple" />
+		</svg>
+	  </div>
+    </div>
+	
+	<script src="styles/styles.js"></script>
+	<script src="src/app.js"></script>
+
+  </body>
+</html>
